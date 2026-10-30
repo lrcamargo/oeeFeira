@@ -1,0 +1,19 @@
+WISE-4012 / PAINEL OEE - MALETA SENAI
+
+1. Instale Python 3 no computador que está na rede do WISE.
+2. Extraia esta pasta e execute: python server.py
+3. Abra http://localhost:8765 no navegador.
+4. Escolha "Demonstração manual" ou "WISE-4012 real".
+5. Informe o IP do WISE e, em "Mapeamento manual", selecione a função de cada entrada UI0 a UI3.
+6. Clique "Conectar / aplicar". A cada mudança de rede, basta editar o IP e reconectar.
+
+IMPORTANTE:
+- As entradas universais precisam estar configuradas como digitais/contador no próprio WISE.
+- A URL consultada é GET http://IP:80/di_value/slot_0, conforme manual WISE-4000.
+- O servidor Python funciona como ponte HTTP para contornar CORS e registra eventos em SQLite (wise_oee.sqlite3).
+- Os totais de OEE da página ficam no localStorage deste navegador. Não são compartilhados com outros dispositivos; o servidor guarda eventos em SQLite para auditoria básica.
+- Na ausência de comunicação, o painel não inventa o estado da máquina e interrompe a contabilização.
+- O modo demonstração é independente das entradas físicas.
+- Para controle industrial e OEE oficial, recomenda-se tratamento de turnos, desconexões, contadores de hardware, redundância e armazenamento central dos indicadores.
+- Esta versão somente lê entradas do WISE, não aciona saídas.
+- O uso na rede industrial exige autorização de TI, e o servidor não deve ser publicado na internet sem autenticação.
